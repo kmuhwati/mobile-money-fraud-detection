@@ -1,0 +1,185 @@
+{
+  "alert_budget": 0.02,
+  "n_all_transactions": 6362620,
+  "fraud_by_type": {
+    "PAYMENT": 0,
+    "CASH_OUT": 4116,
+    "DEBIT": 0,
+    "CASH_IN": 0,
+    "TRANSFER": 4097
+  },
+  "rows": {
+    "train": 2529536,
+    "valid": 158652,
+    "test": 82221
+  },
+  "fraud_rate": {
+    "test": 0.026124712664647717,
+    "train": 0.00176988981378403,
+    "valid": 0.01000932859339939
+  },
+  "leakage_audit": {
+    "legitimate": {
+      "amount_equals_full_balance": 0.0,
+      "orig_balance_arithmetic_holds": 0.0949,
+      "new_orig_balance_zero": 0.901,
+      "dest_balance_arithmetic_holds": 0.9039,
+      "flagged_by_legacy_rule": 0.0
+    },
+    "fraud": {
+      "amount_equals_full_balance": 0.9763,
+      "orig_balance_arithmetic_holds": 0.9945,
+      "new_orig_balance_zero": 0.9805,
+      "dest_balance_arithmetic_holds": 0.4842,
+      "flagged_by_legacy_rule": 0.0019
+    }
+  },
+  "models": [
+    {
+      "model": "Rule: amount drains the account",
+      "tier": "B_authorisation_time",
+      "auprc": 0.9723,
+      "roc_auc": 0.985,
+      "alerts@budget": 1644,
+      "precision@budget": 1.0,
+      "recall@budget": 0.7654,
+      "value_recall@budget": 0.6439,
+      "auprc_lo": 0.9665,
+      "auprc_hi": 0.9785,
+      "recall_lo": 0.7359,
+      "recall_hi": 0.7969
+    },
+    {
+      "model": "Rule: legacy isFlaggedFraud",
+      "tier": "A_all_columns_leaky",
+      "auprc": 0.0317,
+      "roc_auc": 0.5069,
+      "alerts@budget": 1644,
+      "precision@budget": 0.031,
+      "recall@budget": 0.0237,
+      "value_recall@budget": 0.0387,
+      "auprc_lo": 0.0285,
+      "auprc_hi": 0.0347,
+      "recall_lo": 0.0179,
+      "recall_hi": 0.0293
+    },
+    {
+      "model": "Logistic regression (tier B)",
+      "tier": "B_authorisation_time",
+      "auprc": 0.9996,
+      "roc_auc": 1.0,
+      "alerts@budget": 1644,
+      "precision@budget": 1.0,
+      "recall@budget": 0.7654,
+      "value_recall@budget": 0.6916,
+      "auprc_lo": 0.9989,
+      "auprc_hi": 1.0,
+      "recall_lo": 0.7359,
+      "recall_hi": 0.7969
+    },
+    {
+      "model": "LightGBM (A_all_columns_leaky)",
+      "tier": "A_all_columns_leaky",
+      "auprc": 0.9996,
+      "roc_auc": 0.9999,
+      "alerts@budget": 1644,
+      "precision@budget": 1.0,
+      "recall@budget": 0.7654,
+      "value_recall@budget": 0.3827,
+      "auprc_lo": 0.9988,
+      "auprc_hi": 1.0,
+      "recall_lo": 0.7359,
+      "recall_hi": 0.7969
+    },
+    {
+      "model": "LightGBM (B_authorisation_time)",
+      "tier": "B_authorisation_time",
+      "auprc": 1.0,
+      "roc_auc": 1.0,
+      "alerts@budget": 1644,
+      "precision@budget": 1.0,
+      "recall@budget": 0.7654,
+      "value_recall@budget": 0.7983,
+      "auprc_lo": 1.0,
+      "auprc_hi": 1.0,
+      "recall_lo": 0.7359,
+      "recall_hi": 0.7969
+    },
+    {
+      "model": "LightGBM (C_behavioural_only)",
+      "tier": "C_behavioural_only",
+      "auprc": 0.5404,
+      "roc_auc": 0.9261,
+      "alerts@budget": 1644,
+      "precision@budget": 0.5724,
+      "recall@budget": 0.4381,
+      "value_recall@budget": 0.7824,
+      "auprc_lo": 0.5206,
+      "auprc_hi": 0.5593,
+      "recall_lo": 0.4203,
+      "recall_hi": 0.4568
+    },
+    {
+      "model": "Drain rule + LightGBM (C): deployed",
+      "tier": "C_behavioural_only",
+      "auprc": 0.9964,
+      "roc_auc": 0.9999,
+      "alerts@budget": 1644,
+      "precision@budget": 1.0,
+      "recall@budget": 0.7654,
+      "value_recall@budget": 0.8024,
+      "auprc_lo": 0.9951,
+      "auprc_hi": 0.9977,
+      "recall_lo": 0.7359,
+      "recall_hi": 0.7969
+    }
+  ],
+  "operating_point": {
+    "threshold": 0.06132566440814532,
+    "valid": {
+      "alert_rate": 0.020006050979502307,
+      "precision": 0.4974795211090107,
+      "recall": 0.9943324937027708,
+      "value_recall": 0.9716095680678163
+    },
+    "test": {
+      "alert_rate": 0.040634387808467426,
+      "precision": 0.6408260999700689,
+      "recall": 0.9967411545623837,
+      "value_recall": 0.9848285631173243
+    }
+  },
+  "psi_top": [
+    {
+      "feature": "dest_steps_since_last",
+      "psi_valid": 1.21,
+      "psi_test": 3.783
+    },
+    {
+      "feature": "hour",
+      "psi_valid": 0.624,
+      "psi_test": 0.201
+    },
+    {
+      "feature": "MODEL SCORE",
+      "psi_valid": 0.032,
+      "psi_test": 0.088
+    },
+    {
+      "feature": "dest_log_amt_prev_mean",
+      "psi_valid": 0.005,
+      "psi_test": 0.014
+    },
+    {
+      "feature": "is_transfer",
+      "psi_valid": 0.002,
+      "psi_test": 0.009
+    },
+    {
+      "feature": "dest_n_prev",
+      "psi_valid": 0.001,
+      "psi_test": 0.008
+    }
+  ],
+  "deploy_best_iteration": 685
+}

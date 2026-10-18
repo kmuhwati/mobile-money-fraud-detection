@@ -1,0 +1,6 @@
+,legitimate,fraud
+amount_equals_full_balance,0.0,0.976257153293559
+orig_balance_arithmetic_holds,0.09492049079790138,0.9945208815292829
+new_orig_balance_zero,0.9009509100729999,0.9805186898818946
+dest_balance_arithmetic_holds,0.9038862557182763,0.4842323146231584
+flagged_by_legacy_rule,0.0,0.0019481310118105442
